@@ -9,7 +9,7 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
-class JsonToModel
+class JsonToModel extends Deserializer
 {
     /**
      * @var \Illuminate\Contracts\Auth\Authenticatable|\Illuminate\Database\Eloquent\Model
@@ -43,19 +43,6 @@ class JsonToModel
     private function convertRoles($roles): Collection
     {
         return Role::hydrate($roles);
-    }
-
-    /**
-     * @param $jsonAdmin
-     * @return \Illuminate\Contracts\Auth\Authenticatable|null
-     */
-    private function fillModel($jsonAdmin)
-    {
-
-
-        return $this->model->forceFill($jsonAdmin);
-
-
     }
 
 }

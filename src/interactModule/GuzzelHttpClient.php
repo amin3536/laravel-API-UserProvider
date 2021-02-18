@@ -26,7 +26,7 @@ class GuzzelHttpClient implements HttpClient
      * GuzzelHttpClient constructor.
      * @param string $baseUrl
      */
-    public function __construct($baseUrl = self::SERVICE_AUTH)
+    public function __construct($baseUrl)
     {
         $this->client = new Client([
             'base_uri' => $baseUrl,

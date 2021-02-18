@@ -28,13 +28,19 @@ class ExternalUserProvider implements UserProvider
      * @var string
      */
     protected $url;
+    /**
+     * @var mixed
+     */
 
-    public function __construct(HttpClient $httpClient, $model, $url)
+    var $deserializer;
+
+    public function __construct(HttpClient $httpClient, $model, $url, DeserializerInterface $deserializer = null)
     {
 
         $this->httpClient = $httpClient;
         $this->model = $model;
         $this->url = $url;
+        $this->deserializer = $deserializer;
     }
 
 
@@ -60,13 +66,30 @@ class ExternalUserProvider implements UserProvider
     {
 
         $model = $this->createModel();
-        $response = $response = $this->httpClient->createRequest($this->url,'GET',$headers= ['Authorization' => 'Bearer ' . $token])->sendRequest();
+        $response = $response = $this->httpClient->createRequest($this->url, 'GET', $headers = ['Authorization' => 'Bearer ' . $token])->sendRequest();
         if ($response->getStatusCode() == 200) {
-            $jsonToModel = new JsonToModel($model);
-            return $jsonToModel->convert($response->getBody()->getContents());
+            return $this->deserializerContent($model, $response->getBody()->getContents());
         } else {
             throw  new HttpException($response->getStatusCode(), $response->getBody()->getContents());
         }
+    }
+
+
+    public function deserializerContent($model, $bodyContent)
+    {
+        if ($this->deserializer) {
+            $this->createDeserializer();
+        }
+
+        return $this->deserializer->convert($bodyContent);
+
+
+    }
+
+
+    public function createDeserializer()
+    {
+        $this->deserializer = new Deserializer($this->model);
     }
 
 

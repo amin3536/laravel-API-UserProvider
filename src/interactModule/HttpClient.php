@@ -18,17 +18,14 @@ interface HttpClient
     public const METHOD_CONNECT = 'CONNECT';
 
 
-    public const SERVICE_AUTH = "auth:80";
-    public const SERVICE_VIDEOS = "videos:81";
-    public const SERVICE_LEITNER = "leitner:82";
-    public const SERVICE_RESERVATION = "reservation:83";
+
 
 
     /**
      * HttpClient constructor.
      * @param string $baseUrl
      */
-    public function __construct($baseUrl=self::SERVICE_AUTH);
+    public function __construct($baseUrl);
 
     /**
      * @return mixed

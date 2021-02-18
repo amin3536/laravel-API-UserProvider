@@ -18,7 +18,7 @@ class LaravelApiUserProvider extends ServiceProvider
 //        });
 
         Auth::provider('api-provider', function ($app, array $config) {
-            return new ExternalUserProvider(new GuzzelHttpClient(), $config['model'],$config['url']);
+            return new ExternalUserProvider(new GuzzelHttpClient($this->getBaseUrl()), $config['model'], $config['url']);
         });
 
         Auth::Extend('api-token', function ($app, $name, array $config) {
@@ -38,13 +38,10 @@ class LaravelApiUserProvider extends ServiceProvider
     /**
      * Get the user provider configuration.
      *
-     * @param  string|null $provider
-     * @return array|null
+     * @return string|null
      */
-    protected function getProviderConfiguration($provider)
+    protected function getBaseUrl()
     {
-        if ($provider = $provider ?: $this->getDefaultUserProvider()) {
-            return $this->app['config']['auth.providers.' . $provider];
-        }
+        return $this->app['config']['auth.base-url'];
     }
 }
