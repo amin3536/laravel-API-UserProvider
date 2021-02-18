@@ -1,12 +1,12 @@
 {
     "name": "amin3536/laravel-api-user-provider",
     "description": ":package_description",
-    "license": "license",
+    "license": "MIT",
     "authors": [
         {
-            "name": "amin",
+            "name": "amin mirmahmoudi",
             "email": "am.a9173@gmail.com",
-            "homepage": "author homepage"
+            "homepage": "https://github.com/amin3536"
         }
     ],
     "homepage": "https://github.com/amin3536/laravel-api-user-provider",

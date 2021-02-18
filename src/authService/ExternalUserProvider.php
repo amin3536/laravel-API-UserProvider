@@ -77,19 +77,13 @@ class ExternalUserProvider implements UserProvider
 
     public function deserializerContent($model, $bodyContent)
     {
-        if ($this->deserializer) {
-            $this->createDeserializer();
+        if (!$this->deserializer) {
+            $this->deserializer = new Deserializer($model);
         }
 
         return $this->deserializer->convert($bodyContent);
 
 
-    }
-
-
-    public function createDeserializer()
-    {
-        $this->deserializer = new Deserializer($this->model);
     }
 
 
