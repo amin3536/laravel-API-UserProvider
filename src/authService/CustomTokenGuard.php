@@ -6,7 +6,7 @@
  * Time: 4:53 PM.
  */
 
-namespace App\Modules\authService;
+namespace Amin3536\LaravelApiUserProvider\authService;
 
 use Illuminate\Auth\GuardHelpers;
 use Illuminate\Contracts\Auth\Guard;
