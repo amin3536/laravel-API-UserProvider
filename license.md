@@ -1,4 +1,4 @@
-# The license
+# MIT license
 
 Copyright (c) amin <am.a9173@gmail.com>
 
