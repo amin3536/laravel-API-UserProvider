@@ -20,7 +20,6 @@ class Deserializer implements DeserializerInterface
     private $model;
 
 
-
     /**
      * @param $responseBody
      * @return \Illuminate\Contracts\Auth\Authenticatable|null
