@@ -101,7 +101,7 @@ If you discover any security related issues, please email author email instead o
 
 ## Credits
 
-- [amin3520][link-author]
+- [amin3536][link-author]
 - [All Contributors][link-contributors]
 
 ## License
@@ -111,9 +111,9 @@ license. Please see the [license file](license.md) for more information.
 [ico-version]: https://img.shields.io/packagist/v/amin3536/laravel-api-user-provider.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/amin3536/laravel-api-user-provider.svg?style=flat-square
 [ico-travis]: https://img.shields.io/travis/amin3536/laravel-api-user-provider/master.svg?style=flat-square
-[ico-styleci]: https://styleci.io/repos/12345678/shield
+[ico-styleci]: https://github.styleci.io/repos/339999725/shield
 
-[link-packagist]: https://packagist.org/packages/amin3536/laravel-api-user-provider
+[link-packagist]: https://packagist.org/packages/amin3536/laravel-api-user-provider 
 [link-downloads]: https://packagist.org/packages/amin3536/laravel-api-user-provider
 [link-travis]: https://travis-ci.org/amin3536/laravel-api-user-provider
 [link-styleci]: https://styleci.io/repos/12345678
