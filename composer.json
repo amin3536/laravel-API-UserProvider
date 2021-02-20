@@ -1,6 +1,6 @@
 {
     "name": "amin3536/laravel-api-user-provider",
-    "description": ":package_description",
+    "description": "this package help you to provide your user from different service ( useful in micro service specially )",
     "license": "MIT",
     "authors": [
         {
