@@ -6,7 +6,7 @@
  * Time: 12:48 PM.
  */
 
-namespace App\Modules\interactModule;
+namespace Amin3536\LaravelApiUserProvider\interactModule;
 
 /**
  * @property HttpClient client

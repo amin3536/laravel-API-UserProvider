@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\interactModule;
+namespace Amin3536\LaravelApiUserProvider\interactModule;
 
 interface HttpClient
 {

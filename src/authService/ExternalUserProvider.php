@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\authService;
+namespace Amin3536\LaravelApiUserProvider\authService;
 
 use App\Modules\interactModule\HttpClient;
 use Illuminate\Contracts\Auth\Authenticatable;

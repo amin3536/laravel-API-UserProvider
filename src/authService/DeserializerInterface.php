@@ -6,7 +6,7 @@
  * Time: 2:40 PM.
  */
 
-namespace App\Modules\authService;
+namespace Amin3536\LaravelApiUserProvider\authService;
 
 use Illuminate\Database\Eloquent\Model;
 
