@@ -9,6 +9,7 @@
 namespace App\Modules\authService;
 
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 class Deserializer implements DeserializerInterface
@@ -17,11 +18,6 @@ class Deserializer implements DeserializerInterface
      * @var \Illuminate\Contracts\Auth\Authenticatable|\Illuminate\Database\Eloquent\Model
      */
     private $model;
-
-    public function __construct(Model $model)
-    {
-        $this->model = $model;
-    }
 
 
     /**
@@ -50,8 +46,8 @@ class Deserializer implements DeserializerInterface
     }
 
     /**
-     * @param $roles
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @param $list
+     * @return \Illuminate\Database\Eloquent\Collection|null
      */
     protected function convertList($list): Collection
     {

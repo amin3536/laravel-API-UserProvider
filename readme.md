@@ -5,7 +5,10 @@
 [![Build Status][ico-travis]][link-travis]
 [![StyleCI][ico-styleci]][link-styleci]
 
-this pack help ypu to provide your user from different service  ( useFull in micro service )
+this pack help you to provide your user from different service ( useful in micro service )
+### how this package  work
+this package use  bearer token  in header's  request and provide user from Sec Service (Auth service) 
+
 ## Installation
 
 Via Composer
@@ -14,7 +17,69 @@ Via Composer
 $ composer require amin3536/laravel-api-user-provider
 ```
 
+
 ## Usage
+simple usage  this driver  : change your    ``auth.php `` in ``config`` like below
+
+```php
+<?php
+
+return [
+    
+        //.......
+    /*
+    |--------------------------------------------------------------------------
+    | Authentication Guards
+    |--------------------------------------------------------------------------
+    */
+    'guards' => [
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+
+        'api' => [
+            'driver' => 'api-token',
+            'provider' => 'users',
+        ],
+
+        'admin-api' => [
+            'driver' => 'api-token',
+            'provider' => 'admins',
+        ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | User Providers
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    'providers' => [
+        'users' => [
+            'driver' => 'api-provider',
+            'model' => App\Models\User::class,
+           //merged with base_url or you can use full path api here  =>http://localhost/api/admin/
+            'url' => '/api/v1/user/'
+        ],
+        'admins' => [
+            'driver' => 'api-provider',
+            'model' => App\Models\Admin::class,
+            'url' => '/api/v1/admin/'
+        ],
+    ],
+     /*
+        |--------------------------------------------------------------------------
+        | Base url path to to call Auth Service 
+        |--------------------------------------------------------------------------
+        |
+        */
+        'base-url'=>'localhost'
+    //.......
+];
+```
+
 
 ## Change log
 
@@ -36,7 +101,7 @@ If you discover any security related issues, please email author email instead o
 
 ## Credits
 
-- [author name][link-author]
+- [amin3520][link-author]
 - [All Contributors][link-contributors]
 
 ## License
