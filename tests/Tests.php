@@ -1,7 +1,5 @@
 <?php
 
-
-
 class Tests extends \PHPUnit\Framework\TestCase
 {
     /**
