@@ -3,6 +3,8 @@ language: php
 php:
   - 7.3
   - 8.0.0
+cache:
+  - vendor
 
 before_script:
   - composer self-update
