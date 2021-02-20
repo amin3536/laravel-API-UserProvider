@@ -2,7 +2,6 @@
 
 namespace App\Modules\authService;
 
-
 use App\Modules\interactModule\HttpClient;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\UserProvider;
@@ -13,8 +12,7 @@ class ExternalUserProvider implements UserProvider
     /**
      * @var HttpClient
      */
-    var $httpClient;
-
+    public $httpClient;
 
     /**
      * The Eloquent user model.
@@ -31,18 +29,15 @@ class ExternalUserProvider implements UserProvider
     /**
      * @var mixed
      */
-
-    var $deserializer;
+    public $deserializer;
 
     public function __construct(HttpClient $httpClient, $model, $url, DeserializerInterface $deserializer = null)
     {
-
         $this->httpClient = $httpClient;
         $this->model = $model;
         $this->url = $url;
         $this->deserializer = $deserializer;
     }
-
 
     /**
      * Retrieve a user by their unique identifier.
@@ -64,9 +59,8 @@ class ExternalUserProvider implements UserProvider
      */
     public function retrieveByToken($identifier, $token)
     {
-
         $model = $this->createModel();
-        $response = $response = $this->httpClient->createRequest($this->url, 'GET', $headers = ['Authorization' => 'Bearer ' . $token])->sendRequest();
+        $response = $response = $this->httpClient->createRequest($this->url, 'GET', $headers = ['Authorization' => 'Bearer '.$token])->sendRequest();
         if ($response->getStatusCode() == 200) {
             return $this->deserializerContent($model, $response->getBody()->getContents());
         } else {
@@ -74,19 +68,16 @@ class ExternalUserProvider implements UserProvider
         }
     }
 
-
     public function deserializerContent($model, $bodyContent)
     {
-        if (!$this->deserializer) {
+        if (! $this->deserializer) {
             $this->deserializer = new Deserializer();
         }
 
         $this->deserializer->setModel($model);
+
         return $this->deserializer->convert($bodyContent);
-
-
     }
-
 
     /**
      * Update the "remember me" token for the given user in storage.
@@ -123,7 +114,6 @@ class ExternalUserProvider implements UserProvider
         // TODO:  WE don't need it
     }
 
-
     /**
      * Create a new instance of the model.
      *
@@ -131,10 +121,10 @@ class ExternalUserProvider implements UserProvider
      */
     public function createModel()
     {
-        $class = '\\' . ltrim($this->model, '\\');
+        $class = '\\'.ltrim($this->model, '\\');
+
         return new $class;
     }
-
 
     /**
      * Sets the name of the Eloquent user model.
@@ -149,7 +139,6 @@ class ExternalUserProvider implements UserProvider
         return $this;
     }
 
-
     /**
      * Gets the name of the Eloquent user model.
      *
@@ -159,6 +148,4 @@ class ExternalUserProvider implements UserProvider
     {
         return $this->model;
     }
-
-
 }

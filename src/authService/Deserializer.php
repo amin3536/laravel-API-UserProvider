@@ -3,11 +3,10 @@
  * Created by PhpStorm.
  * User: amin
  * Date: 2/18/21
- * Time: 3:05 PM
+ * Time: 3:05 PM.
  */
 
 namespace App\Modules\authService;
-
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -19,18 +18,17 @@ class Deserializer implements DeserializerInterface
      */
     private $model;
 
-
     /**
      * @param $responseBody
      * @return \Illuminate\Contracts\Auth\Authenticatable|null
      */
     public function convert($responseBody)
     {
-        $body = (array)json_decode($responseBody);
+        $body = (array) json_decode($responseBody);
         $model = $this->fillModel($body);
+
         return $model;
     }
-
 
     /**
      * @param $jsonAdmin
@@ -38,11 +36,7 @@ class Deserializer implements DeserializerInterface
      */
     protected function fillModel($jsonAdmin)
     {
-
-
         return $this->model->forceFill($jsonAdmin);
-
-
     }
 
     /**
@@ -61,5 +55,4 @@ class Deserializer implements DeserializerInterface
     {
         $this->model = $model;
     }
-
 }
