@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Modules\interactModule;
-
 
 interface HttpClient
 {
@@ -16,10 +14,6 @@ interface HttpClient
     public const METHOD_OPTIONS = 'OPTIONS';
     public const METHOD_TRACE = 'TRACE';
     public const METHOD_CONNECT = 'CONNECT';
-
-
-
-
 
     /**
      * HttpClient constructor.
@@ -39,5 +33,5 @@ interface HttpClient
      * @param null $body
      * @return HttpClient
      */
-    public function createRequest($uri, $method = self::METHOD_GET, array $headers = [], $body = null):HttpClient;
+    public function createRequest($uri, $method = self::METHOD_GET, array $headers = [], $body = null): HttpClient;
 }

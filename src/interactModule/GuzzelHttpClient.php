@@ -2,11 +2,9 @@
 
 namespace App\Modules\interactModule;
 
-
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
-use Illuminate\Support\Facades\Log;
 
 /**
  * @property Client client
@@ -14,13 +12,11 @@ use Illuminate\Support\Facades\Log;
  */
 class GuzzelHttpClient implements HttpClient
 {
-
     private $request;
     private $defaultHeaders = [
         'Content-Type' => 'application/json',
         'Accept' => 'application/json',
     ];
-
 
     /**
      * GuzzelHttpClient constructor.
@@ -33,7 +29,6 @@ class GuzzelHttpClient implements HttpClient
             'timeout' => 2.0,
         ]);
     }
-
 
     /**
      * @param array $defaultHeaders
@@ -50,7 +45,6 @@ class GuzzelHttpClient implements HttpClient
     public function sendRequest()
     {
         return $this->client->send($this->request);
-
     }
 
     /**
@@ -62,11 +56,9 @@ class GuzzelHttpClient implements HttpClient
      */
     public function createRequest($uri, $method = self::METHOD_GET, array $headers = [], $body = null): HttpClient
     {
-
         $resultHeaders = array_merge($this->defaultHeaders, $headers);
         $this->request = new Request($method, $uri, $resultHeaders, $body);
+
         return $this;
     }
-
-
 }
