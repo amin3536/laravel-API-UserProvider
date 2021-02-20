@@ -3,22 +3,18 @@
  * Created by PhpStorm.
  * User: amin
  * Date: 2/16/21
- * Time: 4:53 PM
+ * Time: 4:53 PM.
  */
 
 namespace App\Modules\authService;
 
-
 use Illuminate\Auth\GuardHelpers;
-use Illuminate\Auth\TokenGuard;
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Http\Request;
-use Illuminate\Contracts\Auth\Guard;
-
 
 class CustomTokenGuard implements Guard
 {
-
     use GuardHelpers;
 
     /**
@@ -84,7 +80,7 @@ class CustomTokenGuard implements Guard
         // If we've already retrieved the user for the current request we can just
         // return it back immediately. We do not want to fetch the user data on
         // every call to this method because that would be tremendously slow.
-        if (!is_null($this->user)) {
+        if (! is_null($this->user)) {
             return $this->user;
         }
 
@@ -92,8 +88,8 @@ class CustomTokenGuard implements Guard
 
         $token = $this->getTokenForRequest();
 
-        if (!empty($token)) {
-            $user = $this->provider->retrieveByToken($this,$token);
+        if (! empty($token)) {
+            $user = $this->provider->retrieveByToken($this, $token);
         }
 
         return $this->user = $user;
@@ -123,7 +119,6 @@ class CustomTokenGuard implements Guard
         return $token;
     }
 
-
     /**
      * Validate a user's credentials.
      *
@@ -132,8 +127,6 @@ class CustomTokenGuard implements Guard
      */
     public function validate(array $credentials = [])
     {
-
-
         return false;
     }
 
@@ -149,5 +142,4 @@ class CustomTokenGuard implements Guard
 
         return $this;
     }
-
 }

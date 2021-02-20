@@ -35,7 +35,7 @@ class LaravelApiUserProviderServiceProvider extends ServiceProvider
 //        });
 
         Auth::provider('api-provider', function ($app, array $config) {
-            return new ExternalUserProvider(new GuzzelHttpClient($this->getBaseUrl()), $config['model'], $config['url'],new Deserializer());
+            return new ExternalUserProvider(new GuzzelHttpClient($this->getBaseUrl()), $config['model'], $config['url'], new Deserializer());
         });
 
         Auth::Extend('api-token', function ($app, $name, array $config) {
@@ -47,6 +47,7 @@ class LaravelApiUserProviderServiceProvider extends ServiceProvider
                 $config['hash'] ?? false
             );
             $this->app->refresh('request', $guard, 'setRequest');
+
             return $guard;
         });
 
@@ -54,7 +55,6 @@ class LaravelApiUserProviderServiceProvider extends ServiceProvider
 //            $this->bootForConsole();
 //        }
     }
-
 
     /**
      * Get the user provider configuration.
