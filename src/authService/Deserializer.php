@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Amin3536\LaravelApiUserProvider\authService;
 
 use Illuminate\Database\Eloquent\Collection;

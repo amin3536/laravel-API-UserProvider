@@ -2,7 +2,6 @@
 
 namespace Amin3536\LaravelApiUserProvider;
 
-
 use Amin3536\LaravelApiUserProvider\authService\CustomTokenGuard;
 use Amin3536\LaravelApiUserProvider\authService\Deserializer;
 use Amin3536\LaravelApiUserProvider\authService\DeserializerInterface;
@@ -33,7 +32,7 @@ class LaravelApiUserProviderServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->app->bind(HttpClient::class, function ($app) {
-            return $app->makeWith(GuzzelHttpClient::class, ["baseUrl" => $this->getBaseUrl()]);
+            return $app->makeWith(GuzzelHttpClient::class, ['baseUrl' => $this->getBaseUrl()]);
         });
         $this->app->bind(DeserializerInterface::class, function ($app) {
             return $app->make(Deserializer::class);
