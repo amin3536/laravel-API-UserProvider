@@ -99,9 +99,9 @@ class LaravelApiUserProviderServiceProvider extends ServiceProvider
     protected function bootForConsole(): void
     {
         // Publishing the configuration file.
-        $this->publishes([
-            __DIR__.'/../config/laravel-api-user-provider.php' => config_path('laravel-api-user-provider.php'),
-        ], 'laravel-api-user-provider.config');
+//        $this->publishes([
+//            __DIR__.'/../config/laravel-api-user-provider.php' => config_path('laravel-api-user-provider.php'),
+//        ], 'laravel-api-user-provider.config');
 
         // Publishing the views.
         /*$this->publishes([
