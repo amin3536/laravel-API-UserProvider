@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: amin
- * Date: 2/18/21
- * Time: 3:05 PM.
- */
+
 
 namespace Amin3536\LaravelApiUserProvider\authService;
 
