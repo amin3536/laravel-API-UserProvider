@@ -1,6 +1,6 @@
 {
     "name": "amin3536/laravel-api-user-provider",
-    "description": ":package_description",
+    "description": "this package help you to provide your user from different service ( useful in micro service specially )",
     "license": "MIT",
     "authors": [
         {
@@ -14,6 +14,7 @@
     "require": {
         "illuminate/support": "~7|~8",
         "guzzlehttp/guzzle": "^7.0.1",
+        "laravel/passport": "^10.1",
         "ext-json": "*"
     },
     "require-dev": {
@@ -37,7 +38,6 @@
                 "Amin3536\\LaravelApiUserProvider\\LaravelApiUserProviderServiceProvider"
             ],
             "aliases": {
-                "LaravelApiUserProvider": "Amin3536\\LaravelApiUserProvider\\Facades\\LaravelApiUserProvider"
             }
         }
     }
