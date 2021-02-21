@@ -156,4 +156,13 @@ class ExternalUserProvider implements UserProvider
     {
         $this->httpClient = $httpClient;
     }
+
+
+    /**
+     * @param mixed $deserializer
+     */
+    public function setDeserializer($deserializer): void
+    {
+        $this->deserializer = $deserializer;
+    }
 }
