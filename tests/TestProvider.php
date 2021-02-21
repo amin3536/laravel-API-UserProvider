@@ -6,13 +6,10 @@ use Illuminate\Foundation\Testing\TestCase;
  * Created by PhpStorm.
  * User: amin
  * Date: 2/21/21
- * Time: 1:19 PM
+ * Time: 1:19 PM.
  */
-
 class TestProvider extends TestCase
 {
-
-
 //    protected function setUp()
 //    {
 //        parent::setUp();
@@ -21,7 +18,6 @@ class TestProvider extends TestCase
 //            return new YourFakeService();
 //        });
 //    }
-
 
     /**
      * Creates the application.
@@ -34,7 +30,6 @@ class TestProvider extends TestCase
     {
         // TODO: Implement createApplication() method.
     }
-
 
     /**
      * A basic test example.
