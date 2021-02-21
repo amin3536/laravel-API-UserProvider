@@ -2,10 +2,12 @@
 
 namespace Amin3536\LaravelApiUserProvider;
 
-use App\Modules\authService\CustomTokenGuard;
-use App\Modules\authService\Deserializer;
-use App\Modules\authService\ExternalUserProvider;
-use App\Modules\interactModule\GuzzelHttpClient;
+use Amin3536\LaravelApiUserProvider\authService\CustomTokenGuard;
+use Amin3536\LaravelApiUserProvider\authService\Deserializer;
+use Amin3536\LaravelApiUserProvider\authService\DeserializerInterface;
+use Amin3536\LaravelApiUserProvider\authService\ExternalUserProvider;
+use Amin3536\LaravelApiUserProvider\interactModule\GuzzelHttpClient;
+use Amin3536\LaravelApiUserProvider\interactModule\HttpClient;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 
@@ -29,13 +31,15 @@ class LaravelApiUserProviderServiceProvider extends ServiceProvider
 
     public function boot()
     {
-//       TODO: manage all service client  (auth , leitner   with container later   :)
-//        $this->app->bind(HttpClient::class, function ($app) {
-//            return $app->make(new GuzzelHttpClient());
-//        });
+        $this->app->bind(HttpClient::class, function ($app) {
+            return $app->makeWith(GuzzelHttpClient::class, ['baseUrl' => $this->getBaseUrl()]);
+        });
+        $this->app->bind(DeserializerInterface::class, function ($app) {
+            return $app->make(Deserializer::class);
+        });
 
         Auth::provider('api-provider', function ($app, array $config) {
-            return new ExternalUserProvider(new GuzzelHttpClient($this->getBaseUrl()), $config['model'], $config['url'], new Deserializer());
+            return $app->makeWith(ExternalUserProvider::class, ['model' => $config['model'], 'url' => $config['url']]);
         });
 
         Auth::Extend('api-token', function ($app, $name, array $config) {

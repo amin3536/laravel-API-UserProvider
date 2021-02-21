@@ -2,7 +2,7 @@
 
 namespace Amin3536\LaravelApiUserProvider\authService;
 
-use App\Modules\interactModule\HttpClient;
+use Amin3536\LaravelApiUserProvider\interactModule\HttpClient;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\UserProvider;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -147,5 +147,21 @@ class ExternalUserProvider implements UserProvider
     public function getModel()
     {
         return $this->model;
+    }
+
+    /**
+     * @param HttpClient $httpClient
+     */
+    public function setHttpClient($httpClient)
+    {
+        $this->httpClient = $httpClient;
+    }
+
+    /**
+     * @param mixed $deserializer
+     */
+    public function setDeserializer($deserializer): void
+    {
+        $this->deserializer = $deserializer;
     }
 }
