@@ -50,7 +50,7 @@ class GuzzelHttpClient implements HttpClient
             if ($e->hasResponse()) {
                 return $e->getResponse();
             }
-
+            throw $e;
         }
     }
 
