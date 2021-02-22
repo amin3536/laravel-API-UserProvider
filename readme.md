@@ -80,6 +80,23 @@ return [
 ];
 ```
 
+## advance 
+if you want  use custom Deserializer class    ,the class must be implement ``DeserializerInterface``  and add below code in boot method of AuthServiceProvider .
+```php
+<?php
+    //...
+    public function boot()
+    {
+
+        $this->app->when(ExternalUserProvider::class)
+            ->needs(DeserializerInterface::class)
+            ->give(function () {
+                return new JsonToModel();
+            });
+    }
+    
+```
+
 
 ## Change log
 

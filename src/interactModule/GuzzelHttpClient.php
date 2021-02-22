@@ -44,7 +44,14 @@ class GuzzelHttpClient implements HttpClient
      */
     public function sendRequest()
     {
-        return $this->client->send($this->request);
+        try {
+            return $this->client->send($this->request);
+        } catch (\GuzzleHttp\Exception\RequestException $e) {
+            if ($e->hasResponse()) {
+                return $e->getResponse();
+            }
+            throw $e;
+        }
     }
 
     /**

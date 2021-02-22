@@ -8,7 +8,7 @@ interface DeserializerInterface
 {
     /**
      * @param $responseBody
-     * @return \Illuminate\Contracts\Auth\Authenticatable|\Illuminate\Database\Eloquent\Collection|null
+     * @return \Illuminate\Contracts\Auth\Authenticatable|Model|\Illuminate\Database\Eloquent\Collection|null
      */
     public function convert($responseBody);
 
