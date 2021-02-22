@@ -73,13 +73,13 @@ return [
         'users' => [
             'driver' => 'api-provider',
             'model' => 'User',
-            'url' => '/api/user/'
+            'url' => '/api/user/',
         ],
         'admins' => [
             'driver' => 'api-provider',
             'model' => 'Admin',
             //merged with base_url or you can use full path api here  =>http://localhost/api/admin/
-            'url' => '/api/admin/'
+            'url' => '/api/admin/',
         ],
     ],
 
@@ -120,6 +120,6 @@ return [
 
     'password_timeout' => 10800,
 
-    'base-url'=>'localhost'
+    'base-url'=>'localhost',
 
 ];

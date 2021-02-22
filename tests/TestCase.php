@@ -1,11 +1,7 @@
 <?php
 
-
-
 class TestCase extends \Orchestra\Testbench\TestCase
 {
-
-
     public function setUp(): void
     {
         parent::setUp();
@@ -23,6 +19,4 @@ class TestCase extends \Orchestra\Testbench\TestCase
     {
         // perform environment setup
     }
-
-
 }
