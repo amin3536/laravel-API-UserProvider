@@ -23,11 +23,11 @@ class GuzzelHttpClient implements HttpClient
      *
      * @param  string  $baseUrl
      */
-    public function __construct($baseUrl)
+    public function __construct($baseUrl,$timeout)
     {
         $this->client = new Client([
             'base_uri' => $baseUrl,
-            'timeout' => 2.0,
+            'timeout' => $timeout,
         ]);
     }
 
