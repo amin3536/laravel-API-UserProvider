@@ -42,11 +42,11 @@ class CustomTokenGuard implements Guard
     /**
      * Create a new authentication guard.
      *
-     * @param  \Illuminate\Contracts\Auth\UserProvider $provider
-     * @param  \Illuminate\Http\Request $request
-     * @param  string $inputKey
-     * @param  string $storageKey
-     * @param  bool $hash
+     * @param  \Illuminate\Contracts\Auth\UserProvider  $provider
+     * @param  \Illuminate\Http\Request  $request
+     * @param  string  $inputKey
+     * @param  string  $storageKey
+     * @param  bool  $hash
      * @return void
      */
     public function __construct(
@@ -116,7 +116,7 @@ class CustomTokenGuard implements Guard
     /**
      * Validate a user's credentials.
      *
-     * @param  array $credentials
+     * @param  array  $credentials
      * @return bool
      */
     public function validate(array $credentials = [])
@@ -127,7 +127,7 @@ class CustomTokenGuard implements Guard
     /**
      * Set the current request instance.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return $this
      */
     public function setRequest(Request $request)

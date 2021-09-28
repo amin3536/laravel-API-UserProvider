@@ -13,7 +13,7 @@ interface DeserializerInterface
     public function convert($responseBody);
 
     /**
-     * @param \Illuminate\Contracts\Auth\Authenticatable|Model $model
+     * @param  \Illuminate\Contracts\Auth\Authenticatable|Model  $model
      */
     public function setModel($model);
 }
