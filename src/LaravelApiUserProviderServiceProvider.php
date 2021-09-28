@@ -32,7 +32,7 @@ class LaravelApiUserProviderServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->app->bind(HttpClient::class, function ($app) {
-            return $app->makeWith(GuzzelHttpClient::class, ['baseUrl' => $this->getBaseUrl(),"timeout"=>$this->getTimeoutRequestToAuthServer()]);
+            return $app->makeWith(GuzzelHttpClient::class, ['baseUrl' => $this->getBaseUrl(), 'timeout'=>$this->getTimeoutRequestToAuthServer()]);
         });
         $this->app->bind(DeserializerInterface::class, function ($app) {
             return $app->make(Deserializer::class);
@@ -70,8 +70,9 @@ class LaravelApiUserProviderServiceProvider extends ServiceProvider
         return $this->app['config']['auth.base-url'];
     }
 
-    protected function getTimeoutRequestToAuthServer(){
-        return $this->app["config"]['auth.TimeoutForRequestAuthServer'];
+    protected function getTimeoutRequestToAuthServer()
+    {
+        return $this->app['config']['auth.TimeoutForRequestAuthServer'];
     }
 
     /**
