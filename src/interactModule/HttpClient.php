@@ -17,7 +17,8 @@ interface HttpClient
 
     /**
      * HttpClient constructor.
-     * @param string $baseUrl
+     *
+     * @param  string  $baseUrl
      */
     public function __construct($baseUrl);
 
@@ -28,9 +29,9 @@ interface HttpClient
 
     /**
      * @param $uri
-     * @param string $method
-     * @param array $headers
-     * @param null $body
+     * @param  string  $method
+     * @param  array  $headers
+     * @param  null  $body
      * @return HttpClient
      */
     public function createRequest($uri, $method = self::METHOD_GET, array $headers = [], $body = null): HttpClient;

@@ -43,7 +43,7 @@ class Deserializer implements DeserializerInterface
     }
 
     /**
-     * @param \Illuminate\Contracts\Auth\Authenticatable|Model $model
+     * @param  \Illuminate\Contracts\Auth\Authenticatable|Model  $model
      */
     public function setModel($model)
     {
