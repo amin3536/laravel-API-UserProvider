@@ -72,7 +72,7 @@ class LaravelApiUserProviderServiceProvider extends ServiceProvider
 
     protected function getTimeoutRequestToAuthServer()
     {
-        return $this->app['config']['auth.TimeoutForRequestAuthServer'];
+        return $this->app['config']->get('auth.TimeoutForRequestAuthServer',2);
     }
 
     /**
