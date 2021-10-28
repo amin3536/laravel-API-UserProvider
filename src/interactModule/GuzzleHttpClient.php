@@ -10,7 +10,7 @@ use GuzzleHttp\Psr7\Request;
  * @property Client client
  * @property Request request
  */
-class GuzzelHttpClient implements HttpClient
+class GuzzleHttpClient implements HttpClient
 {
     private $request;
     private $defaultHeaders = [
