@@ -119,7 +119,7 @@ return [
     */
 
     'password_timeout' => 10800,
-
+    'TimeoutForRequestAuthServer'=>2,
     'base-url'=>'localhost',
 
 ];
