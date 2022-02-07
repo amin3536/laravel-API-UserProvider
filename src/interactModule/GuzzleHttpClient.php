@@ -21,7 +21,7 @@ class GuzzleHttpClient implements HttpClient
     /**
      * GuzzelHttpClient constructor.
      *
-     * @param  string  $baseUrl
+     * @param string $baseUrl
      */
     public function __construct($baseUrl, $timeout)
     {
@@ -32,7 +32,7 @@ class GuzzleHttpClient implements HttpClient
     }
 
     /**
-     * @param  array  $defaultHeaders
+     * @param array $defaultHeaders
      */
     public function setDefaultHeaders($defaultHeaders)
     {
@@ -58,15 +58,16 @@ class GuzzleHttpClient implements HttpClient
 
     /**
      * @param $uri
-     * @param  string  $method
-     * @param  array  $headers
-     * @param  null  $body
+     * @param string $method
+     * @param array $headers
+     * @param null $body
      * @return HttpClient
      */
-    public function createRequest($uri, $method = self::METHOD_GET, array $headers = [], $body = null): HttpClient
+    public function createRequest($uri, $method = self::METHOD_GET, array $headers = [], $body = null, array $options = []): HttpClient
     {
-        $resultHeaders = array_merge($this->defaultHeaders, $headers);
-        $this->request = new Request($method, $uri, $resultHeaders, $body);
+        $resultHeaders = ['headers' => array_merge($this->defaultHeaders, $headers)];
+        $resultOptions = array_merge($resultHeaders, $options);
+        $this->request = new Request($method, $uri, $resultOptions, $body);
 
         return $this;
     }
