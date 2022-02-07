@@ -34,5 +34,5 @@ interface HttpClient
      * @param  null  $body
      * @return HttpClient
      */
-    public function createRequest($uri, $method = self::METHOD_GET, array $headers = [], $body = null,array $options=[]): HttpClient;
+    public function createRequest($uri, $method = self::METHOD_GET, array $headers = [], $body = null, array $options = []): HttpClient;
 }
