@@ -2,9 +2,11 @@
 
 namespace Amin3536\LaravelApiUserProvider\authService;
 
+use Amin3536\LaravelApiUserProvider\Cache\RedisCache;
 use Amin3536\LaravelApiUserProvider\interactModule\HttpClient;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\UserProvider;
+use Illuminate\Support\Facades\Cache;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class ExternalUserProvider implements UserProvider
@@ -50,22 +52,33 @@ class ExternalUserProvider implements UserProvider
         // TODO: WE don't need it
     }
 
+
+
     /**
      * Retrieve a user by their unique identifier and "remember me" token.
      *
-     * @param  mixed $identifier
-     * @param  string $token
+     * @param  mixed  $identifier
+     * @param  string  $token
      * @return \Illuminate\Contracts\Auth\Authenticatable|null
      */
-    public function retrieveByToken($identifier, $token)
-    {
+    public function retrieveByToken($identifier, $token){
+        $cache= new  (config("laravel-api-user-provider.cache_token.cache_driver"))();
         $model = $this->createModel();
-        $response = $response = $this->httpClient->createRequest($this->url, 'GET', $headers = ['Authorization' => 'Bearer '.$token])->sendRequest();
-        if ($response->getStatusCode() == 200) {
-            return $this->deserializerContent($model, $response->getBody()->getContents());
-        } else {
-            throw  new HttpException($response->getStatusCode(), $response->getBody()->getContents());
+        if( config("laravel-api-user-provider.cache_token.is_active")==true and $content = $cache->tryRetrieveFromCache($token)){
+            return $this->deserializerContent($model, $content);
+        }else{
+            $response = $response = $this->httpClient->createRequest($this->url, 'GET', $headers = ['Authorization' => 'Bearer '.$token])->sendRequest();
+            if ($response->getStatusCode() == 200) {
+                if(config("laravel-api-user-provider.cache_token.is_active")==true){
+                    $cache->updateOrStoreTokenInRedisCache($token,$response->getBody()->getContents());
+                }
+                return $this->deserializerContent($model, $response->getBody()->getContents());
+            }
+            else {
+                throw  new HttpException($response->getStatusCode(), $response->getBody()->getContents());
+            }
         }
+
     }
 
     public function deserializerContent($model, $bodyContent)
@@ -100,16 +113,6 @@ class ExternalUserProvider implements UserProvider
     public function retrieveByCredentials(array $credentials)
     {
         // TODO:  WE don't need it
-    }
-    public function tryRetrieveByToken($identifier, $token)
-    {
-        $model = $this->createModel();
-        $response = $response = $this->httpClient->createRequest($this->url, 'GET', $headers = ['Authorization' => 'Bearer '.$token])->sendRequest();
-        if ($response->getStatusCode() == 200) {
-            return $this->deserializerContent($model, $response->getBody()->getContents());
-        } else {
-            return  false;
-        }
     }
 
     /**

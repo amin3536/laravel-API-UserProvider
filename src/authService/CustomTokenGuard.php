@@ -89,6 +89,11 @@ class CustomTokenGuard implements Guard
         return $this->user = $user;
     }
 
+    public function id()
+    {
+        return $this->user()->id;
+    }
+
     /**
      * Get the token for the current request.
      *
@@ -116,7 +121,7 @@ class CustomTokenGuard implements Guard
     /**
      * Validate a user's credentials.
      *
-     * @param  array $credentials
+     * @param  array  $credentials
      * @return bool
      */
     public function validate(array $credentials = [])
@@ -127,7 +132,7 @@ class CustomTokenGuard implements Guard
     /**
      * Set the current request instance.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return $this
      */
     public function setRequest(Request $request)
@@ -137,20 +142,7 @@ class CustomTokenGuard implements Guard
         return $this;
     }
 
-    public function attempToGetUser(){
-        if (! is_null($this->user)) {
-            return $this->user;
-        }
-
-        $user = null;
-
-        $token = $this->getTokenForRequest();
-
-        if (! empty($token)) {
-            $user = $this->provider->tryRetrieveByToken($this, $token);
-        }
-
-        if (!$user)return false;
-        return $this->user = $user;
+    public function logout(){
+        $this->user=null;
     }
 }
