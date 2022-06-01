@@ -77,7 +77,7 @@ class LaravelApiUserProviderServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-//        $this->mergeConfigFrom(__DIR__.'/../config/laravel-api-user-provider.php', 'laravel-api-user-provider');
+        $this->mergeConfigFrom(__DIR__.'/../config/laravel-api-user-provider.php', 'laravel-api-user-provider');
 
 //        // Register the service the package provides.
 //        $this->app->singleton('laravel-api-user-provider', function ($app) {
