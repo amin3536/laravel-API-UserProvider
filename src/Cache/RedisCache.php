@@ -14,7 +14,13 @@ class RedisCache
         return "user_token_".$token;
     }
     public function getExpierTimeFromAuthServer($token,$content){
-        return 100;
+        $content=json_decode($content);
+        if(!isset($content->token_expire_at)){
+            throw new \Exception("dont set token_expire_at in user data");
+        }
+        $token_expire_at =Carbon::make( $content->token_expire_at);
+        $now=Carbon::make( now());
+        return $token_expire_at->timestamp-$now->timestamp;
     }
     public function getTimeExpierCache($token,$content){
         $ttl=config("laravel-api-user-provider.cache_token.ttl");
