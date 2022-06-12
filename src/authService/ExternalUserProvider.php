@@ -64,12 +64,12 @@ class ExternalUserProvider implements UserProvider
     public function retrieveByToken($identifier, $token){
         $cache= new  (config("laravel-api-user-provider.cache_token.cache_driver"))();
         $model = $this->createModel();
-        if( config("laravel-api-user-provider.cache_token.is_active")==true and $content = $cache->tryRetrieveFromCache($token)){
+        if( config("laravel-api-user-provider.cache_token.cache_is_active")==true and $content = $cache->tryRetrieveFromCache($token)){
             return $this->deserializerContent($model, $content);
         }else{
             $response = $response = $this->httpClient->createRequest($this->url, 'GET', $headers = ['Authorization' => 'Bearer '.$token])->sendRequest();
             if ($response->getStatusCode() == 200) {
-                if(config("laravel-api-user-provider.cache_token.is_active")==true){
+                if(config("laravel-api-user-provider.cache_token.cache_is_active")==true){
                     $cache->updateOrStoreTokenInRedisCache($token,$response->getBody()->getContents());
                 }
                 return $this->deserializerContent($model, $response->getBody()->getContents());
