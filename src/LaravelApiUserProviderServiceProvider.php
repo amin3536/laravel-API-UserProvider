@@ -6,7 +6,7 @@ use Amin3536\LaravelApiUserProvider\authService\CustomTokenGuard;
 use Amin3536\LaravelApiUserProvider\authService\Deserializer;
 use Amin3536\LaravelApiUserProvider\authService\DeserializerInterface;
 use Amin3536\LaravelApiUserProvider\authService\ExternalUserProvider;
-use Amin3536\LaravelApiUserProvider\interactModule\GuzzelHttpClient;
+use Amin3536\LaravelApiUserProvider\interactModule\GuzzleHttpClient;
 use Amin3536\LaravelApiUserProvider\interactModule\HttpClient;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
@@ -32,7 +32,7 @@ class LaravelApiUserProviderServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->app->bind(HttpClient::class, function ($app) {
-            return $app->makeWith(GuzzelHttpClient::class, ['baseUrl' => $this->getBaseUrl()]);
+            return $app->makeWith(GuzzleHttpClient::class, ['baseUrl' => $this->getBaseUrl(), 'timeout'=>$this->getTimeoutRequestToAuthServer()]);
         });
         $this->app->bind(DeserializerInterface::class, function ($app) {
             return $app->make(Deserializer::class);
@@ -68,6 +68,11 @@ class LaravelApiUserProviderServiceProvider extends ServiceProvider
     protected function getBaseUrl()
     {
         return $this->app['config']['auth.base-url'];
+    }
+
+    protected function getTimeoutRequestToAuthServer()
+    {
+        return $this->app['config']->get('auth.TimeoutForRequestAuthServer', 2);
     }
 
     /**

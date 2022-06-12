@@ -75,7 +75,8 @@ return [
         |--------------------------------------------------------------------------
         |
         */
-        'base-url'=>'localhost'
+        'base-url'=>'localhost',
+        'TimeoutForRequestAuthServer'=>2
     //.......
 ];
 ```

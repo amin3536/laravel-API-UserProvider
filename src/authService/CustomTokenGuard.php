@@ -42,20 +42,20 @@ class CustomTokenGuard implements Guard
     /**
      * Create a new authentication guard.
      *
-     * @param  \Illuminate\Contracts\Auth\UserProvider $provider
-     * @param  \Illuminate\Http\Request $request
-     * @param  string $inputKey
-     * @param  string $storageKey
-     * @param  bool $hash
+     * @param  \Illuminate\Contracts\Auth\UserProvider  $provider
+     * @param  \Illuminate\Http\Request  $request
+     * @param  string  $inputKey
+     * @param  string  $storageKey
+     * @param  bool  $hash
      * @return void
      */
     public function __construct(
         UserProvider $provider,
         Request $request,
-        $inputKey = 'api_token',
-        $storageKey = 'api_token',
+                     $inputKey = 'api_token',
+                     $storageKey = 'api_token',
 
-        $hash = false)
+                     $hash = false)
     {
         $this->hash = $hash;
         $this->request = $request;

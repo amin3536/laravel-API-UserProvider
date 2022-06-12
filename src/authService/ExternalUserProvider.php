@@ -44,7 +44,7 @@ class ExternalUserProvider implements UserProvider
     /**
      * Retrieve a user by their unique identifier.
      *
-     * @param  mixed $identifier
+     * @param  mixed  $identifier
      * @return \Illuminate\Contracts\Auth\Authenticatable|null
      */
     public function retrieveById($identifier)
@@ -95,8 +95,8 @@ class ExternalUserProvider implements UserProvider
     /**
      * Update the "remember me" token for the given user in storage.
      *
-     * @param  \Illuminate\Contracts\Auth\Authenticatable $user
-     * @param  string $token
+     * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
+     * @param  string  $token
      * @return void
      */
     public function updateRememberToken(Authenticatable $user, $token)
@@ -107,7 +107,7 @@ class ExternalUserProvider implements UserProvider
     /**
      * Retrieve a user by the given credentials.
      *
-     * @param  array $credentials
+     * @param  array  $credentials
      * @return \Illuminate\Contracts\Auth\Authenticatable|null
      */
     public function retrieveByCredentials(array $credentials)
@@ -118,8 +118,8 @@ class ExternalUserProvider implements UserProvider
     /**
      * Validate a user against the given credentials.
      *
-     * @param  \Illuminate\Contracts\Auth\Authenticatable $user
-     * @param  array $credentials
+     * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
+     * @param  array  $credentials
      * @return bool
      */
     public function validateCredentials(Authenticatable $user, array $credentials)
@@ -142,7 +142,7 @@ class ExternalUserProvider implements UserProvider
     /**
      * Sets the name of the Eloquent user model.
      *
-     * @param  string $model
+     * @param  string  $model
      * @return $this
      */
     public function setModel($model)
@@ -163,7 +163,7 @@ class ExternalUserProvider implements UserProvider
     }
 
     /**
-     * @param HttpClient $httpClient
+     * @param  HttpClient  $httpClient
      */
     public function setHttpClient($httpClient)
     {
@@ -171,7 +171,7 @@ class ExternalUserProvider implements UserProvider
     }
 
     /**
-     * @param mixed $deserializer
+     * @param  mixed  $deserializer
      */
     public function setDeserializer($deserializer): void
     {
