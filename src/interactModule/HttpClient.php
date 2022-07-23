@@ -33,7 +33,7 @@ interface HttpClient
      * @param $client
      * @return Void_
      */
-    public function setClient( $client );
+    public function setClient($client);
 
     /**
      * @param $uri
