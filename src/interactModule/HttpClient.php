@@ -2,6 +2,8 @@
 
 namespace Amin3536\LaravelApiUserProvider\interactModule;
 
+use phpDocumentor\Reflection\Types\Void_;
+
 interface HttpClient
 {
     public const METHOD_HEAD = 'HEAD';
@@ -26,6 +28,12 @@ interface HttpClient
      * @return mixed
      */
     public function sendRequest();
+
+    /**
+     * @param $client
+     * @return Void_
+     */
+    public function setClient($client);
 
     /**
      * @param $uri
