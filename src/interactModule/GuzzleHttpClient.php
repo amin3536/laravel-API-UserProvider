@@ -71,4 +71,9 @@ class GuzzleHttpClient implements HttpClient
 
         return $this;
     }
+
+    public function setClient($client)
+    {
+        $this->client = $client;
+    }
 }
