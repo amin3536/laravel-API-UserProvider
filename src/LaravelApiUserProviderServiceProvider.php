@@ -32,14 +32,16 @@ class LaravelApiUserProviderServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->app->bind(HttpClient::class, function ($app) {
-            return $app->makeWith(GuzzleHttpClient::class, ['baseUrl' => $this->getBaseUrl(), 'timeout'=>$this->getTimeoutRequestToAuthServer()]);
+            $config = $app->make('config');
+
+            return new GuzzleHttpClient($this->getBaseUrl($config), $this->getTimeoutRequestToAuthServer($config));
         });
         $this->app->bind(DeserializerInterface::class, function ($app) {
-            return $app->make(Deserializer::class);
+            return new Deserializer();
         });
 
         Auth::provider('api-provider', function ($app, array $config) {
-            return $app->makeWith(ExternalUserProvider::class, ['model' => $config['model'], 'url' => $config['url']]);
+            return new ExternalUserProvider($app->make(HttpClient::class), $config['model'], $config['url'], $app->make(Deserializer::class));
         });
 
         Auth::Extend('api-token', function ($app, $name, array $config) {
@@ -65,14 +67,14 @@ class LaravelApiUserProviderServiceProvider extends ServiceProvider
      *
      * @return string|null
      */
-    protected function getBaseUrl()
+    protected function getBaseUrl($config)
     {
-        return $this->app['config']['auth.base-url'];
+        return $config->get('auth.base-url');
     }
 
-    protected function getTimeoutRequestToAuthServer()
+    protected function getTimeoutRequestToAuthServer($config)
     {
-        return $this->app['config']->get('auth.TimeoutForRequestAuthServer', 2);
+        return $config->get('auth.TimeoutForRequestAuthServer', 2);
     }
 
     /**
