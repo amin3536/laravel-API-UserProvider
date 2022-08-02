@@ -8,6 +8,7 @@ use Amin3536\LaravelApiUserProvider\authService\DeserializerInterface;
 use Amin3536\LaravelApiUserProvider\authService\ExternalUserProvider;
 use Amin3536\LaravelApiUserProvider\interactModule\GuzzleHttpClient;
 use Amin3536\LaravelApiUserProvider\interactModule\HttpClient;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 
@@ -31,9 +32,9 @@ class LaravelApiUserProviderServiceProvider extends ServiceProvider
 
     public function boot()
     {
-
         $this->app->bind(HttpClient::class, function ($app) {
-            return new GuzzleHttpClient($this->getBaseUrl(),$this->getTimeoutRequestToAuthServer());
+            $config=$app->make('config');
+            return new GuzzleHttpClient($this->getBaseUrl($config),$this->getTimeoutRequestToAuthServer($config));
         });
         $this->app->bind(DeserializerInterface::class, function ($app) {
             return new Deserializer();
@@ -66,14 +67,14 @@ class LaravelApiUserProviderServiceProvider extends ServiceProvider
      *
      * @return string|null
      */
-    protected function getBaseUrl()
+    protected function getBaseUrl( $config)
     {
-        return $this->app['config']['auth.base-url'];
+        return $config->get('auth.base-url');
     }
 
-    protected function getTimeoutRequestToAuthServer()
+    protected function getTimeoutRequestToAuthServer( $config)
     {
-        return $this->app['config']->get('auth.TimeoutForRequestAuthServer', 2);
+        return $config->get('auth.TimeoutForRequestAuthServer', 2);
     }
 
     /**
