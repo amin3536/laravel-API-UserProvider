@@ -12,7 +12,7 @@
     "homepage": "https://github.com/amin3536/laravel-api-user-provider",
     "keywords": ["Laravel", "LaravelApiUserProvider"],
     "require": {
-        "illuminate/support": "~7|~8",
+        "illuminate/support": "~7|~8|~9",
         "guzzlehttp/guzzle": "^7.4",
         "laravel/passport": "^10.1",
         "ext-json": "*"
