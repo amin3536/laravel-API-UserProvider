@@ -44,10 +44,10 @@ class GuzzleHttpClient implements HttpClient
      *
      * @throws GuzzleException
      */
-    public function sendRequest( array $options = [])
+    public function sendRequest(array $options = [])
     {
         try {
-            return $this->client->send($this->request,$options);
+            return $this->client->send($this->request, $options);
         } catch (\GuzzleHttp\Exception\RequestException $e) {
             if ($e->hasResponse()) {
                 return $e->getResponse();
@@ -65,7 +65,7 @@ class GuzzleHttpClient implements HttpClient
      */
     public function createRequest($uri, $method = self::METHOD_GET, array $headers = [], $body = null, array $options = []): HttpClient
     {
-        $resultHeaders =  array_merge($this->defaultHeaders, $headers);
+        $resultHeaders = array_merge($this->defaultHeaders, $headers);
         $this->request = new Request($method, $uri, $resultHeaders, $body);
 
         return $this;
