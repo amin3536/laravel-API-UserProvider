@@ -32,7 +32,6 @@ class LaravelApiUserProviderServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->app->bind(HttpClient::class, function ($app) {
-
             return new GuzzleHttpClient($this->getBaseUrl(), $this->getTimeoutRequestToAuthServer());
         });
         $this->app->bind(DeserializerInterface::class, function ($app) {
