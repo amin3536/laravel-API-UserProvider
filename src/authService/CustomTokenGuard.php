@@ -52,10 +52,10 @@ class CustomTokenGuard implements Guard
     public function __construct(
         UserProvider $provider,
         Request $request,
-                     $inputKey = 'api_token',
-                     $storageKey = 'api_token',
-
-                     $hash = false)
+        $inputKey = 'api_token',
+        $storageKey = 'api_token',
+        $hash = false
+    )
     {
         $this->hash = $hash;
         $this->request = $request;

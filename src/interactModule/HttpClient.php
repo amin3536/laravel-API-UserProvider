@@ -25,22 +25,35 @@ interface HttpClient
     public function __construct($baseUrl, $timeout);
 
     /**
+     * Send request function.
+     *
      * @return mixed
      */
     public function sendRequest();
 
     /**
+     * Set client function.
+     *
      * @param $client
      * @return Void_
      */
     public function setClient($client);
 
     /**
+     * Create request function.
+     *
      * @param $uri
-     * @param  string  $method
-     * @param  array  $headers
-     * @param  null  $body
+     * @param string $method
+     * @param array $headers
+     * @param null $body
+     * @param array $options
      * @return HttpClient
      */
-    public function createRequest($uri, $method = self::METHOD_GET, array $headers = [], $body = null, array $options = []): HttpClient;
+    public function createRequest(
+        $uri,
+        $method = self::METHOD_GET,
+        array $headers = [],
+        $body = null,
+        array $options = []
+    ): HttpClient;
 }
