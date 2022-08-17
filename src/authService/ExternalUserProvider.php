@@ -74,16 +74,16 @@ class ExternalUserProvider implements UserProvider
     public function retrieveByToken($identifier, $token) // @codingStandardsIgnoreLine
     {
         $model = $this->createModel();
-        $response = $response = $this->httpClient->createRequest(
+        $response = $this->httpClient->createRequest(
             $this->url,
             'GET',
             $headers = ['Authorization' => 'Bearer '.$token]
         )->sendRequest();
 
         if ($response->getStatusCode() == 200) {
-            return $this->deserializerContent($model, $response->getBody()->getContents());
+            return $this->deserializerContent($model, $response->getContent());
         } else {
-            throw  new HttpException($response->getStatusCode(), $response->getBody()->getContents());
+            throw  new HttpException($response->getStatusCode(), $response->getContent());
         }
     }
 
