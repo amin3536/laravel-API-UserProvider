@@ -2,10 +2,8 @@
 
 namespace Amin3536\LaravelApiUserProvider\Tests\Feature;
 
-use Amin3536\LaravelApiUserProvider\authService\ExternalUserProvider;
 use Amin3536\LaravelApiUserProvider\interactModule\HttpClient;
 use Amin3536\LaravelApiUserProvider\Tests\TestCase;
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -20,8 +18,10 @@ class ApiUserProviderGuardTest extends TestCase
      */
     public function test_unauthorized_request()
     {
+        // Act
         $response = $this->getJson(route('user'));
 
+        // Assert
         $response->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 
@@ -32,24 +32,21 @@ class ApiUserProviderGuardTest extends TestCase
      */
     public function test_auth_server_return_server_error()
     {
+        // Arrange
         $mockHttpClient = $this->partialMock(HttpClient::class, function (MockInterface $mock) {
             $mock->shouldReceive('createRequest')->andReturnSelf();
 
             $mock->shouldReceive('sendRequest')
-                ->andReturn(new Response([], Response::HTTP_INTERNAL_SERVER_ERROR));
+                ->andReturn(new \GuzzleHttp\Psr7\Response(Response::HTTP_INTERNAL_SERVER_ERROR));
         });
-
-        $mockUserProvider = $this->partialMock(ExternalUserProvider::class, function (MockInterface $mock) {
-                $mock->shouldReceive('deserializerContent')->andReturn(new User());
-        });
-
         $this->app->instance(HttpClient::class, $mockHttpClient);
-        $this->app->instance(ExternalUserProvider::class, $mockUserProvider);
 
+        // Act
         $response = $this->getJson(route('user'), [
             'Authorization' => 'Bearer ' . Str::random(64),
         ]);
 
+        // Assert
         $response->assertStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 
@@ -60,24 +57,21 @@ class ApiUserProviderGuardTest extends TestCase
      */
     public function test_auth_server_return_unauthorized_token()
     {
+        // Arrange
         $mockHttpClient = $this->partialMock(HttpClient::class, function (MockInterface $mock) {
             $mock->shouldReceive('createRequest')->andReturnSelf();
 
             $mock->shouldReceive('sendRequest')
-                ->andReturn(new Response([], Response::HTTP_UNAUTHORIZED));
+                ->andReturn(new \GuzzleHttp\Psr7\Response(Response::HTTP_UNAUTHORIZED));
         });
-
-        $mockUserProvider = $this->partialMock(ExternalUserProvider::class, function (MockInterface $mock) {
-            $mock->shouldReceive('deserializerContent')->andReturn(new User());
-        });
-
         $this->app->instance(HttpClient::class, $mockHttpClient);
-        $this->app->instance(ExternalUserProvider::class, $mockUserProvider);
 
+        // Act
         $response = $this->getJson(route('user'), [
             'Authorization' => 'Bearer ' . Str::random(64),
         ]);
 
+        // Assert
         $response->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 
@@ -89,41 +83,27 @@ class ApiUserProviderGuardTest extends TestCase
      */
     public function test_get_auth_user_successfully()
     {
-        $userData = [
+        // Arrange
+        $userData = json_encode([
             'id' => 1,
-            'email' => 'test@gmail.com',
-        ];
+            'name' => 'john doe',
+        ]);
+
         $mockHttpClient = $this->partialMock(HttpClient::class, function (MockInterface $mock) use ($userData) {
             $mock->shouldReceive('createRequest')->andReturnSelf();
 
             $mock->shouldReceive('sendRequest')
-                ->andReturn(new Response($userData, Response::HTTP_OK));
+                ->andReturn(new \GuzzleHttp\Psr7\Response(Response::HTTP_OK, [], $userData));
         });
-
-        $mockUserProvider = $this->partialMock(
-            ExternalUserProvider::class,
-            function (MockInterface $mock) use ($userData) {
-                $mock->shouldReceive('deserializerContent')
-                    ->andReturn(new User());
-            }
-        );
-
         $this->app->instance(HttpClient::class, $mockHttpClient);
-        $this->app->instance(ExternalUserProvider::class, $mockUserProvider);
 
+        // Act
         $response = $this->getJson(route('user'), [
             'Authorization' => 'Bearer ' . Str::random(64),
         ]);
 
-        $response->assertOk()
-            ->assertJsonStructure([
-                'id',
-                'name',
-            ])->assertExactJson([
-                'id' => 1,
-                'name' => 'john doe',
-            ]);
-
+        // Assert
+        $response->assertOk()->assertExactJson(json_decode($userData, true));
         $this->assertNotNull(Auth::user());
     }
 }

@@ -81,9 +81,9 @@ class ExternalUserProvider implements UserProvider
         )->sendRequest();
 
         if ($response->getStatusCode() == 200) {
-            return $this->deserializerContent($model, $response->getContent());
+            return $this->deserializerContent($model, $response->getBody()->getContents());
         } else {
-            throw  new HttpException($response->getStatusCode(), $response->getContent());
+            throw  new HttpException($response->getStatusCode(), $response->getBody()->getContents());
         }
     }
 
