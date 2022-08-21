@@ -140,4 +140,8 @@ class CustomTokenGuard implements Guard
 
         return $this;
     }
+
+    public function logout(){
+        $this->user=null;
+    }
 }
