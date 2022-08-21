@@ -12,27 +12,41 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 class ExternalUserProvider implements UserProvider
 {
     /**
+     * Http client variable.
+     *
      * @var HttpClient
      */
     public $httpClient;
 
     /**
-     * The Eloquent user model.
+     * The Eloquent user model variable.
      *
      * @var string
      */
     protected $model;
+
     /**
-     * The $url api service.
+     * The $url api service variable.
      *
      * @var string
      */
     protected $url;
+
     /**
+     * Deserializer variable.
+     *
      * @var mixed
      */
     public $deserializer;
 
+    /**
+     * ExternalUserProvider constructor.
+     *
+     * @param  HttpClient  $httpClient
+     * @param $model
+     * @param $url
+     * @param  DeserializerInterface|null  $deserializer
+     */
     public function __construct(HttpClient $httpClient, $model, $url, DeserializerInterface $deserializer = null)
     {
         $this->httpClient = $httpClient;
@@ -61,6 +75,7 @@ class ExternalUserProvider implements UserProvider
      * @param  string  $token
      * @return \Illuminate\Contracts\Auth\Authenticatable|null
      */
+
     public function retrieveByToken($identifier, $token){
         $cache= new  (config("laravel-api-user-provider.cache_token.cache_driver"))();
         $model = $this->createModel();
@@ -77,10 +92,18 @@ class ExternalUserProvider implements UserProvider
             else {
                 throw  new HttpException($response->getStatusCode(), $response->getBody()->getContents());
             }
+
         }
 
     }
 
+    /**
+     * Deserializer Content function.
+     *
+     * @param $model
+     * @param $bodyContent
+     * @return Authenticatable|null
+     */
     public function deserializerContent($model, $bodyContent)
     {
         if (! $this->deserializer) {
@@ -136,7 +159,7 @@ class ExternalUserProvider implements UserProvider
     {
         $class = '\\'.ltrim($this->model, '\\');
 
-        return new $class;
+        return new $class();
     }
 
     /**
@@ -163,6 +186,8 @@ class ExternalUserProvider implements UserProvider
     }
 
     /**
+     * Set http client function.
+     *
      * @param  HttpClient  $httpClient
      */
     public function setHttpClient($httpClient)
@@ -171,6 +196,8 @@ class ExternalUserProvider implements UserProvider
     }
 
     /**
+     * Set deserializer function.
+     *
      * @param  mixed  $deserializer
      */
     public function setDeserializer($deserializer): void

@@ -8,11 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Deserializer implements DeserializerInterface
 {
     /**
+     * Model variable.
+     *
      * @var \Illuminate\Contracts\Auth\Authenticatable|\Illuminate\Database\Eloquent\Model
      */
     private $model;
 
     /**
+     * Convert function.
+     *
      * @param $responseBody
      * @return \Illuminate\Contracts\Auth\Authenticatable|null
      */
@@ -25,6 +29,8 @@ class Deserializer implements DeserializerInterface
     }
 
     /**
+     * Fill model function.
+     *
      * @param $jsonAdmin
      * @return \Illuminate\Contracts\Auth\Authenticatable|null
      */
@@ -34,6 +40,8 @@ class Deserializer implements DeserializerInterface
     }
 
     /**
+     * Convert list function.
+     *
      * @param $list
      * @return \Illuminate\Database\Eloquent\Collection|null
      */
@@ -43,6 +51,8 @@ class Deserializer implements DeserializerInterface
     }
 
     /**
+     * Set model function.
+     *
      * @param  \Illuminate\Contracts\Auth\Authenticatable|Model  $model
      */
     public function setModel($model)
