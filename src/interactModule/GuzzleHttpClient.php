@@ -7,6 +7,8 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
 
 /**
+ * GuzzleHttpClient class
+ *
  * @property Client client
  * @property Request request
  */
@@ -19,7 +21,7 @@ class GuzzleHttpClient implements HttpClient
     ];
 
     /**
-     * GuzzelHttpClient constructor.
+     * GuzzleHttpClient constructor.
      *
      * @param  string  $baseUrl
      */
@@ -32,6 +34,8 @@ class GuzzleHttpClient implements HttpClient
     }
 
     /**
+     * Set default headers function
+     *
      * @param  array  $defaultHeaders
      */
     public function setDefaultHeaders($defaultHeaders)
@@ -40,8 +44,9 @@ class GuzzleHttpClient implements HttpClient
     }
 
     /**
-     * @return \Psr\Http\Message\ResponseInterface
+     * Send request function
      *
+     * @return \Psr\Http\Message\ResponseInterface
      * @throws GuzzleException
      */
     public function sendRequest(array $options = [])
@@ -57,13 +62,22 @@ class GuzzleHttpClient implements HttpClient
     }
 
     /**
+     * Create request function
+     *
      * @param $uri
-     * @param  string  $method
-     * @param  array  $headers
-     * @param  null  $body
+     * @param string $method
+     * @param array $headers
+     * @param null $body
+     * @param array $options
      * @return HttpClient
      */
-    public function createRequest($uri, $method = self::METHOD_GET, array $headers = [], $body = null, array $options = []): HttpClient
+    public function createRequest(// @codingStandardsIgnoreLine
+        $uri,
+        $method = self::METHOD_GET,
+        array $headers = [],
+        $body = null,
+        array $options = []
+    ): HttpClient
     {
         $resultHeaders = array_merge($this->defaultHeaders, $headers);
         $this->request = new Request($method, $uri, $resultHeaders, $body);
@@ -71,6 +85,12 @@ class GuzzleHttpClient implements HttpClient
         return $this;
     }
 
+    /**
+     * Set client function
+     *
+     * @param $client
+     * @return \phpDocumentor\Reflection\Types\Void_|void
+     */
     public function setClient($client)
     {
         $this->client = $client;
