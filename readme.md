@@ -137,3 +137,13 @@ license. Please see the [license file](license.md) for more information.
 [link-styleci]: https://styleci.io/repos/12345678
 [link-author]: https://github.com/amin3536
 [link-contributors]: ../../contributors
+
+
+# config
+```
+    'cache_token'=>[
+        "cache_driver"=>\Amin3536\LaravelApiUserProvider\Cache\RedisCache::class,
+        "ttl"=>"auto",# you can set second , when set "auto"  ttl == token expire time from auth server
+        "cache_is_active"=>true
+    ]
+```
