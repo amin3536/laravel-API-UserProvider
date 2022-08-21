@@ -122,4 +122,17 @@ return [
     'TimeoutForRequestAuthServer'=>2,
     'base-url'=>'localhost',
 
+    /*
+     * ---------------------
+     *  Cache token
+     * ---------------------
+     *
+     *
+     */
+    'cache_token'=>[
+        "cache_driver"=>\Amin3536\LaravelApiUserProvider\Cache\RedisCache::class,
+        "ttl"=>"auto",# you can set second , when set "auto"  ttl == token expire time from auth server
+        "cache_is_active"=>true
+    ]
+
 ];
