@@ -43,10 +43,10 @@ interface HttpClient
      * Create request function.
      *
      * @param $uri
-     * @param string $method
-     * @param array $headers
-     * @param null $body
-     * @param array $options
+     * @param  string  $method
+     * @param  array  $headers
+     * @param  null  $body
+     * @param  array  $options
      * @return HttpClient
      */
     public function createRequest(

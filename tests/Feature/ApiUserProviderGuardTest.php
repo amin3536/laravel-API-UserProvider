@@ -43,7 +43,7 @@ class ApiUserProviderGuardTest extends TestCase
 
         // Act
         $response = $this->getJson(route('user'), [
-            'Authorization' => 'Bearer ' . Str::random(64),
+            'Authorization' => 'Bearer '.Str::random(64),
         ]);
 
         // Assert
@@ -68,13 +68,12 @@ class ApiUserProviderGuardTest extends TestCase
 
         // Act
         $response = $this->getJson(route('user'), [
-            'Authorization' => 'Bearer ' . Str::random(64),
+            'Authorization' => 'Bearer '.Str::random(64),
         ]);
 
         // Assert
         $response->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
-
 
     /**
      * Test send bearer token and get user successfully.
@@ -99,7 +98,7 @@ class ApiUserProviderGuardTest extends TestCase
 
         // Act
         $response = $this->getJson(route('user'), [
-            'Authorization' => 'Bearer ' . Str::random(64),
+            'Authorization' => 'Bearer '.Str::random(64),
         ]);
 
         // Assert

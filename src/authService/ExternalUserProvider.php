@@ -10,28 +10,28 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 class ExternalUserProvider implements UserProvider
 {
     /**
-     * Http client variable
+     * Http client variable.
      *
      * @var HttpClient
      */
     public $httpClient;
 
     /**
-     * The Eloquent user model variable
+     * The Eloquent user model variable.
      *
      * @var string
      */
     protected $model;
 
     /**
-     * The $url api service variable
+     * The $url api service variable.
      *
      * @var string
      */
     protected $url;
 
     /**
-     * Deserializer variable
+     * Deserializer variable.
      *
      * @var mixed
      */
@@ -40,10 +40,10 @@ class ExternalUserProvider implements UserProvider
     /**
      * ExternalUserProvider constructor.
      *
-     * @param HttpClient $httpClient
+     * @param  HttpClient  $httpClient
      * @param $model
      * @param $url
-     * @param DeserializerInterface|null $deserializer
+     * @param  DeserializerInterface|null  $deserializer
      */
     public function __construct(HttpClient $httpClient, $model, $url, DeserializerInterface $deserializer = null)
     {
@@ -88,7 +88,7 @@ class ExternalUserProvider implements UserProvider
     }
 
     /**
-     * Deserializer Content function
+     * Deserializer Content function.
      *
      * @param $model
      * @param $bodyContent
@@ -176,7 +176,7 @@ class ExternalUserProvider implements UserProvider
     }
 
     /**
-     * Set http client function
+     * Set http client function.
      *
      * @param  HttpClient  $httpClient
      */
@@ -186,7 +186,7 @@ class ExternalUserProvider implements UserProvider
     }
 
     /**
-     * Set deserializer function
+     * Set deserializer function.
      *
      * @param  mixed  $deserializer
      */

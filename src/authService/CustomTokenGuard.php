@@ -55,8 +55,7 @@ class CustomTokenGuard implements Guard
         $inputKey = 'api_token',
         $storageKey = 'api_token',
         $hash = false
-    )
-    {
+    ) {
         $this->hash = $hash;
         $this->request = $request;
         $this->provider = $provider;

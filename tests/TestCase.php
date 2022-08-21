@@ -7,9 +7,8 @@ use Illuminate\Foundation\Auth\User;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
-
     /**
-     * Get package providers
+     * Get package providers.
      *
      * @return string[]
      */
@@ -21,7 +20,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     }
 
     /**
-     * Get environment setup function
+     * Get environment setup function.
      *
      * @param $app
      */
@@ -35,7 +34,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
         $app['config']->set('auth.providers.users', [
             'driver' => 'api-provider',
             'model' => User::class,
-            'url' => '/api/v1/user/'
+            'url' => '/api/v1/user/',
         ]);
 
         $app['config']->set('auth.defaults.guard', 'api');
@@ -45,7 +44,6 @@ class TestCase extends \Orchestra\Testbench\TestCase
      * Define routes setup.
      *
      * @param $router
-     *
      * @return void
      */
     protected function defineRoutes($router)

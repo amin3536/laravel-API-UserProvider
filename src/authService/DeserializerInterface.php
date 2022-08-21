@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 interface DeserializerInterface
 {
     /**
-     * Convert function
+     * Convert function.
      *
      * @param $responseBody
      * @return \Illuminate\Contracts\Auth\Authenticatable|Model|\Illuminate\Database\Eloquent\Collection|null
@@ -15,7 +15,7 @@ interface DeserializerInterface
     public function convert($responseBody);
 
     /**
-     * Set model function
+     * Set model function.
      *
      * @param  \Illuminate\Contracts\Auth\Authenticatable|Model  $model
      */
