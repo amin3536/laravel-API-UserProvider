@@ -7,7 +7,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
 
 /**
- * GuzzleHttpClient class
+ * GuzzleHttpClient class.
  *
  * @property Client client
  * @property Request request
@@ -34,7 +34,7 @@ class GuzzleHttpClient implements HttpClient
     }
 
     /**
-     * Set default headers function
+     * Set default headers function.
      *
      * @param  array  $defaultHeaders
      */
@@ -44,9 +44,10 @@ class GuzzleHttpClient implements HttpClient
     }
 
     /**
-     * Send request function
+     * Send request function.
      *
      * @return \Psr\Http\Message\ResponseInterface
+     *
      * @throws GuzzleException
      */
     public function sendRequest(array $options = [])
@@ -62,13 +63,13 @@ class GuzzleHttpClient implements HttpClient
     }
 
     /**
-     * Create request function
+     * Create request function.
      *
      * @param $uri
-     * @param string $method
-     * @param array $headers
-     * @param null $body
-     * @param array $options
+     * @param  string  $method
+     * @param  array  $headers
+     * @param  null  $body
+     * @param  array  $options
      * @return HttpClient
      */
     public function createRequest(// @codingStandardsIgnoreLine
@@ -77,8 +78,7 @@ class GuzzleHttpClient implements HttpClient
         array $headers = [],
         $body = null,
         array $options = []
-    ): HttpClient
-    {
+    ): HttpClient {
         $resultHeaders = array_merge($this->defaultHeaders, $headers);
         $this->request = new Request($method, $uri, $resultHeaders, $body);
 
@@ -86,7 +86,7 @@ class GuzzleHttpClient implements HttpClient
     }
 
     /**
-     * Set client function
+     * Set client function.
      *
      * @param $client
      * @return \phpDocumentor\Reflection\Types\Void_|void

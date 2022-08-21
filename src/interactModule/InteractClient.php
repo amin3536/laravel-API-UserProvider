@@ -10,14 +10,14 @@ namespace Amin3536\LaravelApiUserProvider\interactModule;
 
 /**
  * InteractClient class
- * todo : we dont have any complicated logic and can remove Main context ( this class  ) review it please  :)
+ * todo : we dont have any complicated logic and can remove Main context ( this class  ) review it please  :).
  *
  * @property HttpClient client
  */
 class InteractClient
 {
     /**
-     * Client variable
+     * Client variable.
      *
      * @var HttpClient
      */
@@ -26,7 +26,7 @@ class InteractClient
     /**
      * InteractClient constructor.
      *
-     * @param HttpClient $client
+     * @param  HttpClient  $client
      */
     public function __construct(HttpClient $client)
     {
@@ -36,7 +36,7 @@ class InteractClient
     /**
      * Set client function.
      *
-     * @param HttpClient $client
+     * @param  HttpClient  $client
      */
     public function setClient(HttpClient $client)
     {
@@ -45,7 +45,7 @@ class InteractClient
 
     /**
      * Request function
-     * todo : we dont have any complicated logic and can remove Main context ( this class  )
+     * todo : we dont have any complicated logic and can remove Main context ( this class  ).
      *
      * @return mixed
      */
