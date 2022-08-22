@@ -2,7 +2,7 @@
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Total Downloads][ico-downloads]][link-downloads]
-[![Build Status][ico-travis]][link-travis]
+![tests workflow](https://github.com/amin3536/laravel-API-UserProvider/actions/workflows/laravel.yml/badge.svg)
 [![StyleCI][ico-styleci]][link-styleci]
 
 this pack help you to provide your user from different service ( useful in micro service )
