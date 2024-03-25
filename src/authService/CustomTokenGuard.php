@@ -140,4 +140,21 @@ class CustomTokenGuard implements Guard
 
         return $this;
     }
+
+    public function attempToGetUser(){
+        if (! is_null($this->user)) {
+            return $this->user;
+        }
+
+        $user = null;
+
+        $token = $this->getTokenForRequest();
+
+        if (! empty($token)) {
+            $user = $this->provider->tryRetrieveByToken($this, $token);
+        }
+
+        if (!$user)return false;
+        return $this->user = $user;
+    }
 }

@@ -127,6 +127,16 @@ class ExternalUserProvider implements UserProvider
     {
         // TODO:  WE don't need it
     }
+    public function tryRetrieveByToken($identifier, $token)
+    {
+        $model = $this->createModel();
+        $response = $response = $this->httpClient->createRequest($this->url, 'GET', $headers = ['Authorization' => 'Bearer '.$token])->sendRequest();
+        if ($response->getStatusCode() == 200) {
+            return $this->deserializerContent($model, $response->getBody()->getContents());
+        } else {
+            return  false;
+        }
+    }
 
     /**
      * Validate a user against the given credentials.
